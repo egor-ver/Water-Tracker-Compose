@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.watertracker"
-        minSdk = 24
+        minSdk = 26
         //noinspection OldTargetApi
         targetSdk = 36
         versionCode = 1

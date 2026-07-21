@@ -6,7 +6,9 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 class WaterViewModel(application: Application) :
     AndroidViewModel(application) {
@@ -20,6 +22,14 @@ class WaterViewModel(application: Application) :
         private set
 
     init {
+        viewModelScope.launch {
+            val today = LocalDate.now().toString()
+            val savedDate = repository.dateFlow.first()
+            if(today != savedDate){
+                repository.saveCurrent(0)
+                repository.saveDate(today)
+            }
+        }
         viewModelScope.launch {
             repository.currentFlow.collect { saved ->
                 current = saved
