@@ -6,7 +6,7 @@ plugins {
 android {
     namespace = "com.example.watertracker"
     compileSdk {
-        version = release(36) {
+        version = release(37) {
             minorApiLevel = 1
         }
     }
@@ -14,6 +14,7 @@ android {
     defaultConfig {
         applicationId = "com.example.watertracker"
         minSdk = 24
+        //noinspection OldTargetApi
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -54,5 +55,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.11.0")
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
 }
