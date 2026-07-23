@@ -30,4 +30,10 @@ class WaterRepository(private val context: Context){
     suspend fun saveDate(value: String){
         context.dataStore.edit{prefs -> prefs[dateKey] = value}
     }
+
+    private val dao = WaterDatabase.getDatabase(context).waterDao()
+    val historyFlow: Flow<List<WaterDay>> = dao.getAllDays()
+    suspend fun saveDay(date: String, amount: Int) {
+        dao.insertDay(WaterDay(date, amount))
+    }
 }

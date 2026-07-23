@@ -20,6 +20,7 @@ class WaterViewModel(application: Application) :
         private set
     var lastAmount by mutableIntStateOf(0)
         private set
+    val history = repository.historyFlow
 
     init {
         viewModelScope.launch {
@@ -47,6 +48,7 @@ class WaterViewModel(application: Application) :
         lastAmount = amount
         viewModelScope.launch {
             repository.saveCurrent(current)
+            repository.saveDay(LocalDate.now().toString(), current)
         }
     }
 
@@ -64,6 +66,7 @@ class WaterViewModel(application: Application) :
         lastAmount = 0
         viewModelScope.launch {
             repository.saveCurrent(current)
+            repository.saveDay(LocalDate.now().toString(), current)
         }
     }
 
