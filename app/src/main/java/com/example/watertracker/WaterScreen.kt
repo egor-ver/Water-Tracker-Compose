@@ -30,7 +30,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 
 @Composable
-fun WaterScreen(viewModel: WaterViewModel = viewModel()){
+fun WaterScreen(viewModel: WaterViewModel = viewModel(), onHistoryClick: () -> Unit){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -103,6 +103,9 @@ fun WaterScreen(viewModel: WaterViewModel = viewModel()){
         ){
             Text("Удалить последнее")
         }
+        Button({onHistoryClick()}){
+            Text("Перейти к истории")
+        }
     }
 }
 
@@ -112,5 +115,5 @@ fun WaterScreen(viewModel: WaterViewModel = viewModel()){
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun WaterScreenPreview(){
-    WaterScreen()
+    WaterScreen(onHistoryClick = {})
 }
