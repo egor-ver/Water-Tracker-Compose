@@ -1,41 +1,31 @@
 package com.example.watertracker.data.repository
 
 import android.content.Context
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
-import com.example.watertracker.data.local.WaterDay
+import com.example.watertracker.data.datastore.WaterDataStore
 import com.example.watertracker.data.local.WaterDatabase
+import com.example.watertracker.data.local.WaterDay
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
-val Context.dataStore by preferencesDataStore(name = "water_prefs")
 
-class WaterRepository(private val context: Context){
-    private val currentKey = intPreferencesKey("current")
-    private val goalKey = intPreferencesKey("goal")
+class WaterRepository(private val dataStore: WaterDataStore, private val context: Context){
 
-    private val dateKey = stringPreferencesKey("date")
-    val currentFlow: Flow<Int> = context.dataStore.data
-        .map{prefs -> prefs[currentKey]?: 0}
-    val goalFlow: Flow<Int> = context.dataStore.data
-        .map{prefs -> prefs[goalKey]?: 2000}
-    val dateFlow: Flow<String> = context.dataStore.data
-        .map{prefs -> (prefs[dateKey]?: "")}
-    suspend fun saveCurrent(value: Int){
-        context.dataStore.edit{prefs -> prefs[currentKey] = value}
+    suspend fun saveGoal(amount: Int){
+        dataStore.saveGoal(amount)
     }
-    suspend fun saveGoal(value: Int){
-        context.dataStore.edit{prefs -> prefs[goalKey] = value}
+    suspend fun saveCurrent(amount: Int){
+        dataStore.saveCurrent(amount)
     }
-    suspend fun saveDate(value: String){
-        context.dataStore.edit{prefs -> prefs[dateKey] = value}
+    suspend fun saveDate(date: String){
+        dataStore.saveDate(date)
     }
-
+    suspend fun getFirstDate(): String{
+        return dataStore.getFirstDate()
+    }
+    val currentFlow: Flow<Int> = dataStore.currentFlow
+    val goalFlow: Flow<Int> = dataStore.goalFlow
     private val dao = WaterDatabase.getDatabase(context).waterDao()
     val historyFlow: Flow<List<WaterDay>> = dao.getAllDays()
-    suspend fun saveDay(date: String, amount: Int) {
+    suspend fun saveDay(date: String, amount: Int){
         dao.insertDay(WaterDay(date, amount))
     }
 }

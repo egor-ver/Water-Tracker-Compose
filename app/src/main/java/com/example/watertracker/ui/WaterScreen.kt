@@ -12,6 +12,7 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,6 +32,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun WaterScreen(viewModel: WaterViewModel = viewModel(), onHistoryClick: () -> Unit){
+    val uiState by viewModel.waterUiState.collectAsState()
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -46,7 +49,7 @@ fun WaterScreen(viewModel: WaterViewModel = viewModel(), onHistoryClick: () -> U
                 .padding(16.dp)
         )
         Text(
-            text = "Выпито сегодня: ${viewModel.current}",
+            text = "Выпито сегодня: ${uiState.current}",
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black,
@@ -61,7 +64,7 @@ fun WaterScreen(viewModel: WaterViewModel = viewModel(), onHistoryClick: () -> U
                 .fillMaxWidth()
         )
         Text(
-            text = "Дневная цель: ${viewModel.goal}",
+            text = "Дневная цель: ${uiState.goal}",
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black,
@@ -82,7 +85,7 @@ fun WaterScreen(viewModel: WaterViewModel = viewModel(), onHistoryClick: () -> U
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth(0.7f)
         )
-        Button(onClick = {viewModel.updateGoal(text.toIntOrNull())}){
+        Button(onClick = {text.toIntOrNull()?.let { viewModel.updateGoal(it) }}){
             Text("Установить цель")
         }
         Row {
