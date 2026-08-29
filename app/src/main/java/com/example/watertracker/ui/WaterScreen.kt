@@ -1,4 +1,4 @@
-package com.example.watertracker
+package com.example.watertracker.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

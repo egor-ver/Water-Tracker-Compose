@@ -1,10 +1,12 @@
-package com.example.watertracker
+package com.example.watertracker.data.repository
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.example.watertracker.data.local.WaterDay
+import com.example.watertracker.data.local.WaterDatabase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

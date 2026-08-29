@@ -1,4 +1,4 @@
-package com.example.watertracker
+package com.example.watertracker.data.local
 
 import androidx.room.Dao
 import androidx.room.Insert
