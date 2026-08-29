@@ -50,12 +50,4 @@ class WaterViewModel(application: Application) :
         _waterUiState.value = _waterUiState.value.copy(current = (waterUiState.value.current - waterUiState.value.lastAmount).coerceAtLeast(0))
         viewModelScope.launch { repository.saveCurrent(waterUiState.value.current) }
     }
-    fun trackProgress(): Float{
-        return if (waterUiState.value.goal > 0) (waterUiState.value.current.toFloat() / waterUiState.value.goal.toFloat()).coerceIn(0f, 1f)
-        else 0f
-    }
-
-
-
-
 }

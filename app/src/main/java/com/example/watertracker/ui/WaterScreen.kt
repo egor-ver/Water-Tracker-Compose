@@ -58,8 +58,12 @@ fun WaterScreen(viewModel: WaterViewModel = viewModel(), onHistoryClick: () -> U
                 .fillMaxWidth()
                 .padding(20.dp)
         )
+        val progress = when{
+            uiState.goal > 0 -> (uiState.current.toFloat() / uiState.goal).coerceAtLeast(0f)
+            else -> 0f
+        }
         LinearProgressIndicator(
-            progress = {viewModel.trackProgress()},
+            progress = {progress},
             modifier = Modifier
                 .fillMaxWidth()
         )
