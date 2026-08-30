@@ -1,6 +1,6 @@
 package com.example.watertracker.ui
 
-import androidx.compose.foundation.layout.Arrangement
+пшimport androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,11 +25,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 
 
 @Composable
-fun WaterScreen(viewModel: WaterViewModel = viewModel(), onHistoryClick: () -> Unit){
+fun WaterScreen(viewModel: WaterViewModel = hiltViewModel(), onHistoryClick: () -> Unit){
     val uiState by viewModel.waterUiState.collectAsState()
 
     Column(

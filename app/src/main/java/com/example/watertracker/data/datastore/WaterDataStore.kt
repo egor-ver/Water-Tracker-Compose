@@ -6,12 +6,14 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
 val Context.dataStore by preferencesDataStore(name = "water_prefs")
-class WaterDataStore(private val context: Context) {
+class WaterDataStore @Inject constructor(@ApplicationContext private val context: Context) {
     private val currentKey = intPreferencesKey("current")
     private val goalKey = intPreferencesKey("goal")
     private val dateKey = stringPreferencesKey("date")

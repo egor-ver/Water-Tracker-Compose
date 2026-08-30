@@ -14,10 +14,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun HistoryScreen(viewModel: WaterViewModel = viewModel(), onBackClick: () -> Unit){
+fun HistoryScreen(viewModel: WaterViewModel = hiltViewModel(), onBackClick: () -> Unit){
     val history by viewModel.history.collectAsState(initial = emptyList())
     Scaffold { innerPadding ->
         Column(

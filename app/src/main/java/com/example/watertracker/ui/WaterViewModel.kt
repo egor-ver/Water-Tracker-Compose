@@ -1,18 +1,21 @@
 package com.example.watertracker.ui
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import android.content.Context
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.watertracker.data.datastore.WaterDataStore
 import com.example.watertracker.data.repository.WaterRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.time.LocalDate
+import javax.inject.Inject
 
-class WaterViewModel(application: Application) :
-    AndroidViewModel(application) {
-    private val repository = WaterRepository(context = application, dataStore = WaterDataStore(context = application))
+@HiltViewModel
+class WaterViewModel @Inject constructor(
+    private val repository: WaterRepository
+): ViewModel(){
 
     private val _waterUiState = MutableStateFlow(WaterUiState(0, 2000, 0))
     val waterUiState: StateFlow<WaterUiState> = _waterUiState
