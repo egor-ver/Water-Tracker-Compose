@@ -19,12 +19,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -42,7 +40,6 @@ fun WaterScreen(viewModel: WaterViewModel = viewModel(), onHistoryClick: () -> U
             text = "Трекер Воды",
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.Black,
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .fillMaxWidth()
@@ -52,7 +49,6 @@ fun WaterScreen(viewModel: WaterViewModel = viewModel(), onHistoryClick: () -> U
             text = "Выпито сегодня: ${uiState.current}",
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.Black,
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .fillMaxWidth()
@@ -71,7 +67,6 @@ fun WaterScreen(viewModel: WaterViewModel = viewModel(), onHistoryClick: () -> U
             text = "Дневная цель: ${uiState.goal}",
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.Black,
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .fillMaxWidth()
@@ -119,8 +114,3 @@ fun WaterScreen(viewModel: WaterViewModel = viewModel(), onHistoryClick: () -> U
 
 
 
-@Preview(showSystemUi = true, showBackground = true)
-@Composable
-fun WaterScreenPreview(){
-    WaterScreen(onHistoryClick = {})
-}

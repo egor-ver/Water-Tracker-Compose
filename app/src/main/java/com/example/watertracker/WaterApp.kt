@@ -15,7 +15,7 @@ fun WaterApp(){
             WaterScreen(onHistoryClick = { navController.navigate("history") })
         }
         composable("history"){
-            HistoryScreen(onBackClick = { navController.navigate("main") })
+            HistoryScreen(onBackClick = { navController.popBackStack() })
         }
     }
 }
